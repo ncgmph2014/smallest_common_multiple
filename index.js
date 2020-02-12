@@ -10,42 +10,35 @@ function smallestCommons(arr) {
   }
 
   for (let j = 0; j < allNumbers.length; j++) {
-    testCase *= allNumbers[j];
-  }
-
-  for (let j = 0; j < allNumbers.length; j++) {
-    arr2.push((testCase /= allNumbers[j]));
+    arr2.push((testCase *= allNumbers[j]));
   }
 
   let arr3 = arr2;
   for (let j = 0; j < arr3.length; j++) {
-    if (arr3[j] % 2 === 0) {
-      arr2.push(arr3[j] / 2);
+    for (let i = 0; i < allNumbers.length; i++) {
+      if (
+        arr3[j] % allNumbers[i] === 0 &&
+        arr2.includes(arr3[j] / allNumbers[i]) == false
+      ) {
+        arr2.push(arr3[j] / allNumbers[i]);
+      }
     }
-    // if (arr3[j] % 3 === 0) {
-    //   arr2.push(arr3[j] / 3);
-    // }
-    // if (arr3[j] % 4 === 0) {
-    //   arr2.push(arr3[j] / 4);
-    // }
   }
 
   arr2.sort((a, b) => a - b);
-
-  let arr4 = arr2.filter((a, b) => arr2.indexOf(a) === b);
-  console.log(arr4);
+  console.log(arr2);
   //   console.log(allNumbers + " is allNumbers array");
   //   console.log(arr2 + "  is arr2");
   //   console.log(allNumbers.every(x => 60 % x === 0) + " testing, testing");
-  for (let k = 0; k < arr4.length; k++) {
-    if (allNumbers.every(x => arr4[k] % x === 0) === true) {
-      return arr4[k];
+  for (let k = 0; k < arr2.length; k++) {
+    if (allNumbers.every(x => arr2[k] % x === 0) === true) {
+      return arr2[k];
     }
   }
 }
 
-console.log(smallestCommons([1, 5]));
-console.log(smallestCommons([5, 1]));
-console.log(smallestCommons([2, 10])); //should return 2520.
-console.log(smallestCommons([1, 13])); //should return 360360. //timed out because i was doing too much
-console.log(smallestCommons([23, 18])); //should retr
+console.log(smallestCommons([1, 5]) + " should return 60"); //should return 60
+console.log(smallestCommons([5, 1]) + " should return 60"); //should return 60
+console.log(smallestCommons([2, 10]) + " should return 2520"); //should return 2520.
+console.log(smallestCommons([1, 13]) + " should return 360360"); //should return 360360. //timed out because i was doing too much
+console.log(smallestCommons([23, 18]) + " should return 6056820"); //should return 6056820.
