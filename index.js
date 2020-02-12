@@ -24,7 +24,16 @@ function smallestCommons(arr) {
       }
     }
   }
-
+  let arr4 = arr2;
+  console.log(arr4);
+  //this doesn't work, but it's getting better. will figure out tomorrow
+  for (let i = 0; i < arr4; i++) {
+    for (let j = 2; j <= 20; j++) {
+      if (arr4[i] % j === 0 && arr2.includes(arr4[i] / j) == false) {
+        arr2.push(arr4[i] / j);
+      }
+    }
+  }
   arr2.sort((a, b) => a - b);
   console.log(arr2);
   //   console.log(allNumbers + " is allNumbers array");
